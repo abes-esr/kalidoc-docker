@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+
+  #################################
+  # Interface d'admin de postgresql
+  # -------------------------------
+  kalidoc-db-adminer:
+    image: adminer:4.8.1
+    container_name: kalidoc-db-adminer
+    restart: unless-stopped
+    ports:
+      - 9081:8080
+    depends_on:
+      - kalidoc-db
+    environment:
+      ADMINER_DEFAULT_SERVER: "kalidoc-db"
+    logging:
+      driver: none # pas de log pour adminer pour ne pas polluer
+
