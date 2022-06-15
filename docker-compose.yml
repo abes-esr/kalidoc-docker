@@ -59,7 +59,8 @@ services:
   # --------------------------
   # (basé sur un conteneur postgresql)
   kalidoc-db:
-    image: postgres:14.3
+    build: ./images/postgres_14.3-fr_FR/
+    image: abesesr/postgres:14.3-fr_FR
     container_name: kalidoc-db
     restart: unless-stopped
     environment:
@@ -98,6 +99,7 @@ services:
       POSTGRES_USER: "kalidoc"
       POSTGRES_PASSWORD: "kalidocsecret"
       POSTGRES_EXTRA_OPTS: "-Z6 --schema=public --blobs --clean"
+      # pour tester toutes les minutes => SCHEDULE: "* * * * *"
       SCHEDULE: "@daily"
       TZ: "Europe/Paris"
       BACKUP_KEEP_DAYS: 7
