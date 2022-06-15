@@ -20,17 +20,16 @@ services:
     restart: unless-stopped
     environment:
       - KALIDOC_VUE_APP_ROOT_API=${KALIDOC_VUE_APP_ROOT_API}
-      - KALIDOC_VUE_APP_RECAPTCHA_KEY_SITE=${KALIDOC_VUE_APP_RECAPTCHA_KEY_SITE}
     ports:
       - ${KALIDOC_FRONT_HTTP_PORT}:80
+    depends_on:
+      - kalidoc-web
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=kalidoc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=nginx"
-    depends_on:
-      - kalidoc-web
 
 
   ############################
@@ -45,6 +44,8 @@ services:
     #   - SPRING_PROFILES_ACTIVE=${APPLIS_ENV}
     ports:
       - ${KALIDOC_WEB_HTTP_PORT}:8080
+    depends_on:
+      - kalidoc-db
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
