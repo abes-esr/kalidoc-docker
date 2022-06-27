@@ -1,10 +1,13 @@
 # qualimarc-docker
 
-Configuration docker pour déployer l'application qualimarc qui se compose de plusieurs modules :
-- https://github.com/abes-esr/qualimarc-api 
-- https://github.com/abes-esr/qualimarc-front
+Qualimarc est l'outils de diagnostic des notices du Sudoc.
 
-Ce dépôt permet de déployer l'application qualimarc en local, en dev, en test et en prod.
+Ce dépôt contient la configuration docker pour déployer l'application qualimarc en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
+
+Il utilise les images docker liées et générées par les codes de source suivants :
+- https://github.com/abes-esr/qualimarc-api : l'API de qualimarc
+- https://github.com/abes-esr/qualimarc-front : l'interface utilisateur de qualimarc
+
 
 ## Prérequis
 
