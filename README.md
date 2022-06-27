@@ -1,6 +1,6 @@
 # qualimarc-docker
 
-Qualimarc est l'outils de diagnostic des notices du Sudoc.
+Qualimarc est l'outil de diagnostic des notices du Sudoc.
 
 Ce dépôt contient la configuration docker pour déployer l'application qualimarc en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
 
