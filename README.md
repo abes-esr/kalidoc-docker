@@ -80,3 +80,8 @@ docker-compose pull
 docker-compose up
 ```
 Le ``pull`` aura pour effet de télécharger l'éventuelle dernière images docker disponible pour la version glissante en cours (ex: ``develop-web`` ou ``main-web``). Sans le pull c'est la dernière image téléchargée qui sera utilisée.
+
+## Architecture
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQE2ImlIkdPWhz_mUH3LeGg-tAUtiqTzJXx4zP5UjHY75Cl9Snw2gj1M0ww6iYJf_kM-gBtLGdJcCgb/pub?w=666&amp;h=322">
+([lien](https://docs.google.com/drawings/d/1ki8ih3egccbf1SBsW4uDTAp7v5hCThQijG3ghki_d9c/edit) pour modifier le schéma)
