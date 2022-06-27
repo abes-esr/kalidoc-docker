@@ -1,7 +1,7 @@
 # qualimarc-docker
 
 Configuration docker pour déployer l'application qualimarc qui se compose de plusieurs modules :
-- https://github.com/abes-esr/qualimarc-back 
+- https://github.com/abes-esr/qualimarc-api 
 - https://github.com/abes-esr/qualimarc-front
 
 Ce dépôt permet de déployer l'application qualimarc en local, en dev, en test et en prod.
