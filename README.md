@@ -49,6 +49,19 @@ cd /opt/pod/qualimarc-docker/
 docker-compose stop
 ```
 
+## Configuration
+
+Pour configurer l'application, vous devez créer et personnaliser un fichier ``/opt/pod/qualimarc-docker/.env``.
+
+Les paramètres à placer dans le ``.env`` et des exemples de valeurs sont indiqués dans ce fichier [``.env-dist``](https://github.com/abes-esr/qualimarc-docker/blob/develop/.env-dist)
+
+Pour configurer votre application, le mieux est de procéder ici :
+```
+cd /opt/pod/qualimarc-docker/
+cp .env-dist .env
+# ouvrez le fichier .env pour le personnaliser
+```
+
 ## Supervision
 
 
@@ -85,7 +98,7 @@ Pour récupérer et démarrer la dernière version de l'application :
 docker-compose pull
 docker-compose up
 ```
-Le ``pull`` aura pour effet de télécharger l'éventuelle dernière images docker disponible pour la version glissante en cours (ex: ``develop-web`` ou ``main-web``). Sans le pull c'est la dernière image téléchargée qui sera utilisée.
+Le ``pull`` aura pour effet de télécharger l'éventuelle dernière images docker disponible pour la version glissante en cours (ex: ``develop-api`` ou ``main-api``). Sans le pull c'est la dernière image téléchargée qui sera utilisée.
 
 ## Architecture
 
