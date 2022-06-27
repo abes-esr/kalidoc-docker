@@ -1,5 +1,5 @@
 #
-# Ci-dessous la config qui permet de lancer kalidoc
+# Ci-dessous la config qui permet de lancer qualimarc
 #
 # Remarque: avant de lancer docker-compose up, il faut régler le fichier .env
 # en partant du fichier .env-dist qui donne les variables d'environnements
@@ -11,72 +11,72 @@ version: "3"
 services:
 
   # ##################################
-  # # Interface utilisateur de kalidoc
+  # # Interface utilisateur de qualimarc
   # # --------------------------------
   # # (basé sur vuejs)
-  # kalidoc-front:
-  #   image: abesesr/kalidoc:${KALIDOC_FRONT_VERSION}
-  #   container_name: kalidoc-front
+  # qualimarc-front:
+  #   image: abesesr/qualimarc:${KALIDOC_FRONT_VERSION}
+  #   container_name: qualimarc-front
   #   restart: unless-stopped
   #   environment:
   #     - KALIDOC_VUE_APP_ROOT_API=${KALIDOC_VUE_APP_ROOT_API}
   #   ports:
   #     - ${KALIDOC_FRONT_HTTP_PORT}:80
   #   depends_on:
-  #     - kalidoc-web
+  #     - qualimarc-web
   #   labels:
   #     # pour envoyer les logs dans le puits de log de l'abes
   #     - "co.elastic.logs/enabled=true"
   #     - "co.elastic.logs/processors.add_fields.target="
-  #     - "co.elastic.logs/processors.add_fields.fields.abes_appli=kalidoc"
+  #     - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
   #     - "co.elastic.logs/processors.add_fields.fields.abes_middleware=nginx"
 
 
   ############################
-  # API de kalidoc
+  # API de qualimarc
   # --------------------------
   # (basé sur spring boot)
-  kalidoc-web:
-    image: abesesr/kalidoc:${KALIDOC_WEB_VERSION}
-    container_name: kalidoc-web
+  qualimarc-web:
+    image: abesesr/qualimarc:${KALIDOC_WEB_VERSION}
+    container_name: qualimarc-web
     restart: unless-stopped
     # environment:
     #   - SPRING_PROFILES_ACTIVE=${APPLIS_ENV}
     ports:
       - ${KALIDOC_WEB_HTTP_PORT}:8080
     depends_on:
-      - kalidoc-db
+      - qualimarc-db
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
-      - "co.elastic.logs/processors.add_fields.fields.abes_appli=kalidoc"
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=java-spring"
 
 
   ############################
-  # Base de données de kalidoc
+  # Base de données de qualimarc
   # --------------------------
   # (basé sur un conteneur postgresql)
-  kalidoc-db:
+  qualimarc-db:
     build: ./images/postgres_14.3-fr_FR/
     image: abesesr/postgres:14.3-fr_FR
-    container_name: kalidoc-db
+    container_name: qualimarc-db
     restart: unless-stopped
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
-      POSTGRES_DB: "kalidoc"
-      POSTGRES_USER: "kalidoc"
-      POSTGRES_PASSWORD: "kalidocsecret"
+      POSTGRES_DB: "qualimarc"
+      POSTGRES_USER: "qualimarc"
+      POSTGRES_PASSWORD: "qualimarcsecret"
     volumes:
-      - ./volumes/kalidoc-db/pgdata/:/var/lib/postgresql/data/
+      - ./volumes/qualimarc-db/pgdata/:/var/lib/postgresql/data/
     ports:
       - ${KALIDOC_WEB_HTTP_PORT}:8080
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
-      - "co.elastic.logs/processors.add_fields.fields.abes_appli=kalidoc"
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=postgresql"
 
 
@@ -85,19 +85,19 @@ services:
   # --------------------------
   # (dump tous les jours pour les sauvegardes)
   # https://hub.docker.com/r/prodrigestivill/postgres-backup-local
-  kalidoc-db-dumper:
+  qualimarc-db-dumper:
     image: prodrigestivill/postgres-backup-local:14
-    container_name: kalidoc-db-dumper
+    container_name: qualimarc-db-dumper
     restart: unless-stopped
     volumes:
-        - ./volumes/kalidoc-db/dump/:/backups/
+        - ./volumes/qualimarc-db/dump/:/backups/
     depends_on:
-        - kalidoc-db
+        - qualimarc-db
     environment:
-      POSTGRES_HOST: "kalidoc-db"
-      POSTGRES_DB: "kalidoc"
-      POSTGRES_USER: "kalidoc"
-      POSTGRES_PASSWORD: "kalidocsecret"
+      POSTGRES_HOST: "qualimarc-db"
+      POSTGRES_DB: "qualimarc"
+      POSTGRES_USER: "qualimarc"
+      POSTGRES_PASSWORD: "qualimarcsecret"
       POSTGRES_EXTRA_OPTS: "-Z6 --schema=public --blobs --clean"
       # pour tester toutes les minutes => SCHEDULE: "* * * * *"
       SCHEDULE: "@daily"
@@ -109,7 +109,7 @@ services:
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
-      - "co.elastic.logs/processors.add_fields.fields.abes_appli=kalidoc"
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=adhoc"
       # log multiline aussi pour ce conteneur avec des lignes qui ressemblent à ceci:
       # 2021/08/13 15:24:42 15 cmd: /backup.sh

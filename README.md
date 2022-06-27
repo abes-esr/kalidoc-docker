@@ -1,10 +1,10 @@
-# kalidoc-docker
+# qualimarc-docker
 
-Configuration docker pour déployer l'application kalidoc qui se compose de plusieurs modules :
-- https://github.com/abes-esr/kalidoc-back 
-- https://github.com/abes-esr/kalidoc-front
+Configuration docker pour déployer l'application qualimarc qui se compose de plusieurs modules :
+- https://github.com/abes-esr/qualimarc-back 
+- https://github.com/abes-esr/qualimarc-front
 
-Ce dépôt permet de déployer l'application kalidoc en local, en dev, en test et en prod.
+Ce dépôt permet de déployer l'application qualimarc en local, en dev, en test et en prod.
 
 ## Prérequis
 
@@ -15,8 +15,8 @@ Disposer de :
 ## Installation
 
 ```bash
-git clone https://github.com/abes-esr/kalidoc-docker.git
-cd kalidoc-docker/
+git clone https://github.com/abes-esr/qualimarc-docker.git
+cd qualimarc-docker/
 cp .env-dist .env
 # personnaliser le contenu du .env
 docker-compose up -d
@@ -24,14 +24,14 @@ docker-compose up -d
 
 Une base de données postgresql vide sera alors automatiquement initialisée. Ses données binaires seront placée dans le répertoire persistant suivante (attention le user unix de ce répertoire est celui du conteneur postgresql qui n'est pas le même que celui que vous utilisez pour installer l'application) :
 ```
-kalidoc-docker/volumes/kalidoc-db/pgdata/
+qualimarc-docker/volumes/qualimarc-db/pgdata/
 ```
 
 ## Démarrage et arrêt
 
 ```bash
 # pour démarrer l'application
-cd kalidoc-docker/
+cd qualimarc-docker/
 docker-compose up -d
 ```
 
@@ -39,7 +39,7 @@ Remarque : retirer le ``-d`` pour voir passer les logs dans le terminal et utili
 
 ```bash
 # pour stopper l'application
-cd kalidoc-docker/
+cd qualimarc-docker/
 docker-compose stop
 ```
 
@@ -48,7 +48,7 @@ docker-compose stop
 
 ```bash
 # pour visualiser les logs de l'appli
-cd kalidoc-docker/
+cd qualimarc-docker/
 docker-compose logs -f --tail=100
 ```
 
@@ -57,8 +57,8 @@ Cela va afficher les 100 dernière lignes de logs générées par l'application 
 ## Sauvegardes
 
 Les éléments suivants sont à sauvegarder:
-- ``kalidoc-docker/.env`` : contient la configuration spécifique de notre déploiement
-- ``kalidoc-docker/volumes/kalidoc-db/dump/`` : contient les dumps quotidiens de la base de données postgresql de kalidoc
+- ``qualimarc-docker/.env`` : contient la configuration spécifique de notre déploiement
+- ``qualimarc-docker/volumes/qualimarc-db/dump/`` : contient les dumps quotidiens de la base de données postgresql de qualimarc
 
 Il est possible de régler la fréquence et le moment de la génération des dump de postgresql en modifiant la variable : XXXXXTODOpréciser
 
@@ -67,7 +67,7 @@ Il est possible de régler la fréquence et le moment de la génération des dum
 ### Admin de postgresql
 Pour avoir l'interface d'admin web de postgresql (basée sur [Adminer](https://www.adminer.org/)), lancez ceci :
 ```bash
-cd kalidoc-docker/
+cd qualimarc-docker/
 docker-compose -f docker-compose.yml -f docker-compose.adminer.yml up
 ```
 Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:9081/

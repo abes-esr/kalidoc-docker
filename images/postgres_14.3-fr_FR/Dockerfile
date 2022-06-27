@@ -1,7 +1,7 @@
 # TODO: probablement en faire un dépot docker dédié soit
-# générique car d'autres application en auront besoin, soit spécifique a kalidoc
+# générique car d'autres application en auront besoin, soit spécifique a qualimarc
 # l'avantage d'en faire une spécifique c'est qu'on pourrait aussi y ajouter les
-# schéma + échantillon de données spécifique à kalidoc
+# schéma + échantillon de données spécifique à qualimarc
 FROM postgres:14.3
 
 # config de postgresql pour être en Français:

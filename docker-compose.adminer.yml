@@ -6,16 +6,16 @@ services:
   #################################
   # Interface d'admin de postgresql
   # -------------------------------
-  kalidoc-db-adminer:
+  qualimarc-db-adminer:
     image: adminer:4.8.1
-    container_name: kalidoc-db-adminer
+    container_name: qualimarc-db-adminer
     restart: unless-stopped
     ports:
       - 9081:8080
     depends_on:
-      - kalidoc-db
+      - qualimarc-db
     environment:
-      ADMINER_DEFAULT_SERVER: "kalidoc-db"
+      ADMINER_DEFAULT_SERVER: "qualimarc-db"
     logging:
       driver: none # pas de log pour adminer pour ne pas polluer
 
