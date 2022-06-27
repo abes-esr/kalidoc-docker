@@ -18,23 +18,26 @@ Disposer de :
 ## Installation
 
 ```bash
+# adaptez /opt/pod/ avec l'emplacement où vous souhaitez déployer l'application
+cd /opt/pod/
 git clone https://github.com/abes-esr/qualimarc-docker.git
-cd qualimarc-docker/
+
+cd /opt/pod/qualimarc-docker/
 cp .env-dist .env
-# personnaliser le contenu du .env
+# personnaliser alors le contenu du .env
 docker-compose up -d
 ```
 
-Une base de données postgresql vide sera alors automatiquement initialisée. Ses données binaires seront placée dans le répertoire persistant suivante (attention le user unix de ce répertoire est celui du conteneur postgresql qui n'est pas le même que celui que vous utilisez pour installer l'application) :
+Une base de données postgresql vide sera alors automatiquement initialisée. Ses données binaires seront placées dans le répertoire persistant suivante (attention le user unix de ce répertoire est celui du conteneur postgresql qui n'est pas le même que celui que vous utilisez pour installer l'application) :
 ```
-qualimarc-docker/volumes/qualimarc-db/pgdata/
+/opt/pod/qualimarc-docker/volumes/qualimarc-db/pgdata/
 ```
 
 ## Démarrage et arrêt
 
 ```bash
 # pour démarrer l'application
-cd qualimarc-docker/
+cd /opt/pod/qualimarc-docker/
 docker-compose up -d
 ```
 
@@ -42,7 +45,7 @@ Remarque : retirer le ``-d`` pour voir passer les logs dans le terminal et utili
 
 ```bash
 # pour stopper l'application
-cd qualimarc-docker/
+cd /opt/pod/qualimarc-docker/
 docker-compose stop
 ```
 
@@ -51,7 +54,7 @@ docker-compose stop
 
 ```bash
 # pour visualiser les logs de l'appli
-cd qualimarc-docker/
+cd /opt/pod/qualimarc-docker/
 docker-compose logs -f --tail=100
 ```
 
@@ -60,8 +63,8 @@ Cela va afficher les 100 dernière lignes de logs générées par l'application 
 ## Sauvegardes
 
 Les éléments suivants sont à sauvegarder:
-- ``qualimarc-docker/.env`` : contient la configuration spécifique de notre déploiement
-- ``qualimarc-docker/volumes/qualimarc-db/dump/`` : contient les dumps quotidiens de la base de données postgresql de qualimarc
+- ``/opt/pod/qualimarc-docker/.env`` : contient la configuration spécifique de notre déploiement
+- ``/opt/pod/qualimarc-docker/volumes/qualimarc-db/dump/`` : contient les dumps quotidiens de la base de données postgresql de qualimarc
 
 Il est possible de régler la fréquence et le moment de la génération des dump de postgresql en modifiant la variable : XXXXXTODOpréciser
 
@@ -70,7 +73,7 @@ Il est possible de régler la fréquence et le moment de la génération des dum
 ### Admin de postgresql
 Pour avoir l'interface d'admin web de postgresql (basée sur [Adminer](https://www.adminer.org/)), lancez ceci :
 ```bash
-cd qualimarc-docker/
+cd /opt/pod/qualimarc-docker/
 docker-compose -f docker-compose.yml -f docker-compose.adminer.yml up
 ```
 Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:9081/
