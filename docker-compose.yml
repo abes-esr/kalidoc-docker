@@ -59,8 +59,7 @@ services:
   # ----------------------------
   # (basé sur un conteneur postgresql)
   qualimarc-db:
-    build: ./images/postgres_14.3-fr_FR/
-    image: abesesr/postgres:14.3-fr_FR
+    image: abesesr/postgres-fr_fr:14.3.0
     container_name: qualimarc-db
     restart: unless-stopped
     environment:
