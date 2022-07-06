@@ -10,26 +10,26 @@ version: "3"
 
 services:
 
-  # ####################################
-  # # Interface utilisateur de qualimarc
-  # # ----------------------------------
-  # # (basé sur vuejs)
-  # qualimarc-front:
-  #   image: abesesr/qualimarc:${QUALIMARC_FRONT_VERSION}
-  #   container_name: qualimarc-front
-  #   restart: unless-stopped
-  #   environment:
-  #     - QUALIMARC_VUE_APP_ROOT_API=${QUALIMARC_VUE_APP_ROOT_API}
-  #   ports:
-  #     - ${QUALIMARC_FRONT_HTTP_PORT}:80
-  #   depends_on:
-  #     - qualimarc-api
-  #   labels:
-  #     # pour envoyer les logs dans le puits de log de l'abes
-  #     - "co.elastic.logs/enabled=true"
-  #     - "co.elastic.logs/processors.add_fields.target="
-  #     - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
-  #     - "co.elastic.logs/processors.add_fields.fields.abes_middleware=nginx"
+  ####################################
+  # Interface utilisateur de qualimarc
+  # ----------------------------------
+  # (basé sur vuejs)
+  qualimarc-front:
+    image: abesesr/qualimarc:${QUALIMARC_FRONT_VERSION}
+    container_name: qualimarc-front
+    restart: unless-stopped
+    environment:
+      QUALIMARC_VUE_APP_ROOT_API: ${QUALIMARC_VUE_APP_ROOT_API}
+    ports:
+      - ${QUALIMARC_FRONT_HTTP_PORT}:80
+    depends_on:
+      - qualimarc-api
+    labels:
+      # pour envoyer les logs dans le puits de log de l'abes
+      - "co.elastic.logs/enabled=true"
+      - "co.elastic.logs/processors.add_fields.target="
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=nginx"
 
 
   ############################
