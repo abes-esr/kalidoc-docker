@@ -137,5 +137,9 @@ services:
     container_name: qualimarc-watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 10 --cleanup qualimarc-api qualimarc-front
+    environment:
+      WATCHTOWER_CLEANUP: true
+      WATCHTOWER_POLL_INTERVAL: 10
+      WATCHTOWER_DEBUG: false
+    command: qualimarc-api qualimarc-front
 
