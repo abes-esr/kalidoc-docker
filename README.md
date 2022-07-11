@@ -107,6 +107,10 @@ docker-compose -f docker-compose.yml -f docker-compose.adminer.yml up -d
 ```
 Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:11082/
 
+Vous devriez obtenir une interface qui ressemble à ceci:  
+![image](https://user-images.githubusercontent.com/328244/178326892-25ad4218-02e6-4f61-aab9-9ea1a94b8e6b.png)
+
+
 ### Mise à jour de la dernière version
 
 Pour récupérer et démarrer la dernière version de l'application vous pouvez le faire manuellement comme ceci :
