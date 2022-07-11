@@ -103,9 +103,9 @@ Il est possible de régler la fréquence et le moment de la génération des dum
 Pour avoir l'interface d'admin web de postgresql (basée sur [Adminer](https://www.adminer.org/)), lancez ceci :
 ```bash
 cd /opt/pod/qualimarc-docker/
-docker-compose -f docker-compose.yml -f docker-compose.adminer.yml up
+docker-compose -f docker-compose.yml -f docker-compose.adminer.yml up -d
 ```
-Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:9081/
+Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:11082/
 
 ### Mise à jour de la dernière version
 
