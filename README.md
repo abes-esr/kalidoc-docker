@@ -109,12 +109,14 @@ Accédez ensuite à Adminer sur l'URL suivante : http://127.0.0.1:9081/
 
 ### Mise à jour de la dernière version
 
-Pour récupérer et démarrer la dernière version de l'application :
+Pour récupérer et démarrer la dernière version de l'application vous pouvez le faire manuellement comme ceci :
 ```bash
 docker-compose pull
 docker-compose up
 ```
 Le ``pull`` aura pour effet de télécharger l'éventuelle dernière images docker disponible pour la version glissante en cours (ex: ``develop-api`` ou ``main-api``). Sans le pull c'est la dernière image téléchargée qui sera utilisée.
+
+Ou bien [lancer le conteneur ``qualimarc-watchtower``](https://github.com/abes-esr/qualimarc-docker/blob/develop/README.md#d%C3%A9ploiement-continu) qui le fera automatiquement toutes les quelques secondes pour vous.
 
 ## Architecture
 
