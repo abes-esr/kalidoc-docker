@@ -1,6 +1,6 @@
 #
 # Ci-dessous la config qui permet de lancer le système de déploiement en continue de qualimarc
-# cf README.md pour explications
+# cf README.md pour explications: https://github.com/abes-esr/qualimarc-docker#d%C3%A9ploiement-continu
 #
 
 version: "3"
