@@ -28,10 +28,7 @@ cp .env-dist .env
 docker-compose up -d
 ```
 
-Pour information, une base de données postgresql vide sera alors automatiquement initialisée. Ses données binaires seront placées dans le répertoire persistant suivante (attention le user unix de ce répertoire est celui du conteneur postgresql qui n'est pas le même que celui que vous utilisez pour installer l'application) :
-```
-/opt/pod/qualimarc-docker/volumes/qualimarc-db/pgdata/
-```
+Pour information, une base de données postgresql vide sera alors automatiquement initialisée. Ses données binaires seront placées dans le répertoire persistant suivante (attention le user unix de ce répertoire est celui du conteneur postgresql qui n'est pas le même que celui que vous utilisez pour installer l'application) : ``/opt/pod/qualimarc-docker/volumes/qualimarc-db/pgdata/``
 
 ## Démarrage et arrêt
 
