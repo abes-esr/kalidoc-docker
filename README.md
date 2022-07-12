@@ -1,5 +1,7 @@
 # qualimarc-docker
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/abesesr/qualimarc.svg)](https://hub.docker.com/r/abesesr/qualimarc/)
+
 Qualimarc est l'outil de diagnostic des notices du Sudoc.
 
 Ce dépôt contient la configuration docker 🐳 pour déployer l'application qualimarc en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
