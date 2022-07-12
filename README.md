@@ -6,7 +6,7 @@ Qualimarc est l'outil de diagnostic des notices du Sudoc.
 
 Ce dépôt contient la configuration docker 🐳 pour déployer l'application qualimarc en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
 
-Les URLs correspondantes aux développement en local, dev, test et prod sont les suivantes :
+Les URLs correspondantes aux déploiements en local, dev, test et prod sont les suivantes :
 - local :
   - http://127.0.0.1:11080/ : URL interne de qualimarc-front
   - http://127.0.0.1:11081/api/v1/143519379 : URL interne de qualimarc-api
