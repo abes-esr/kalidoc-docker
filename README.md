@@ -6,9 +6,25 @@ Qualimarc est l'outil de diagnostic des notices du Sudoc.
 
 Ce dépôt contient la configuration docker 🐳 pour déployer l'application qualimarc en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
 
-Il utilise les images docker liées et générées par les codes de source suivants :
-- https://github.com/abes-esr/qualimarc-api : code source de l'API de qualimarc
-- https://github.com/abes-esr/qualimarc-front : code source de l'interface utilisateur de qualimarc
+Les URLs correspondantes aux développement en local, dev, test et prod sont les suivantes :
+- local :
+  - http://127.0.0.1:11080/ : URL interne de qualimarc-front
+  - http://127.0.0.1:11081/api/v1/143519379 : URL interne de qualimarc-api
+- dev :
+  - https://qualimarc-dev.sudoc.fr : homepage de qualimarc (n'existe pas encore)
+  - https://qualimarc-dev.sudoc.fr/api/v1/143519379 : API de qualimarc (n'existe pas encore)
+  - http://diplotaxis-dev.v212.abes.fr:11080/ : URL interne de qualimarc-front
+  - http://diplotaxis-dev.v212.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
+- test :
+  - https://qualimarc-test.sudoc.fr : homepage de qualimarc (n'existe pas encore)
+  - https://qualimarc-test.sudoc.fr/api/v1/143519379 : API de qualimarc (n'existe pas encore)
+  - http://diplotaxis-test.v202.abes.fr:11080/ : URL interne de qualimarc-front
+  - http://diplotaxis-test.v202.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
+- prod
+  - https://qualimarc.sudoc.fr : homepage de qualimarc (n'existe pas encore)
+  - https://qualimarc.sudoc.fr/api/v1/143519379 : API de qualimarc (n'existe pas encore)
+  - http://diplotaxis-prod.v102.abes.fr:11080/ : URL interne de qualimarc-front
+  - http://diplotaxis-prod.v102.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
 
 
 ## Prérequis
@@ -129,3 +145,7 @@ Ou bien [lancer le conteneur ``qualimarc-watchtower``](https://github.com/abes-e
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vQE2ImlIkdPWhz_mUH3LeGg-tAUtiqTzJXx4zP5UjHY75Cl9Snw2gj1M0ww6iYJf_kM-gBtLGdJcCgb/pub?w=1332&amp;h=645">
 
 ([lien](https://docs.google.com/drawings/d/1ki8ih3egccbf1SBsW4uDTAp7v5hCThQijG3ghki_d9c/edit) pour modifier le schéma)
+
+Les codes de source de qualimarc sont ici :
+- https://github.com/abes-esr/qualimarc-api : code source de l'API de qualimarc
+- https://github.com/abes-esr/qualimarc-front : code source de l'interface utilisateur de qualimarc
