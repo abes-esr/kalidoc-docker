@@ -71,7 +71,7 @@ Pour configurer l'application, vous devez créer et personnaliser un fichier ``/
 Les paramètres à placer dans le ``.env`` et des exemples de valeurs sont indiqués dans ce fichier [``.env-dist``](https://github.com/abes-esr/qualimarc-docker/blob/develop/.env-dist)
 
 Pour configurer votre application, le mieux est de procéder ici :
-```
+```bash
 cd /opt/pod/qualimarc-docker/
 cp .env-dist .env
 # ouvrez le fichier .env pour le personnaliser
@@ -142,7 +142,7 @@ Ou bien [lancer le conteneur ``qualimarc-watchtower``](https://github.com/abes-e
 
 ## Architecture
 
-<img src="https://docs.google.com/drawings/d/e/2PACX-1vQE2ImlIkdPWhz_mUH3LeGg-tAUtiqTzJXx4zP5UjHY75Cl9Snw2gj1M0ww6iYJf_kM-gBtLGdJcCgb/pub?w=1332&amp;h=645">
+<img alt="schéma architecture" src="https://docs.google.com/drawings/d/e/2PACX-1vQE2ImlIkdPWhz_mUH3LeGg-tAUtiqTzJXx4zP5UjHY75Cl9Snw2gj1M0ww6iYJf_kM-gBtLGdJcCgb/pub?w=1332&amp;h=645">
 
 ([lien](https://docs.google.com/drawings/d/1ki8ih3egccbf1SBsW4uDTAp7v5hCThQijG3ghki_d9c/edit) pour modifier le schéma)
 

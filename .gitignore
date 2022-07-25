@@ -1,3 +1,4 @@
 .env
 volumes/qualimarc-db/pgdata/*
 volumes/qualimarc-db/dump/*
+.idea/
