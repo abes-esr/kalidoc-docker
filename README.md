@@ -38,14 +38,23 @@ Disposer de :
 
 ## Installation
 
+Déployer la configuration docker dans un répertoire :
 ```bash
 # adaptez /opt/pod/ avec l'emplacement où vous souhaitez déployer l'application
 cd /opt/pod/
 git clone https://github.com/abes-esr/qualimarc-docker.git
+```
 
+Configurer l'application depuis l'exemple du [fichier ``.env-dist``](./.env-dist) :
+```bash
 cd /opt/pod/qualimarc-docker/
 cp .env-dist .env
 # personnaliser alors le contenu du .env
+```
+
+Démarrer l'application :
+```bash
+cd /opt/pod/qualimarc-docker/
 docker-compose up -d
 ```
 
