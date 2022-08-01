@@ -18,17 +18,19 @@ Les URLs correspondantes aux déploiements en local, dev, test et prod de qualim
   - https://qualimarc-dev.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
   - http://diplotaxis-dev.v212.abes.fr:11080/ : URL interne de qualimarc-front
   - http://diplotaxis-dev.v212.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
+  - http://diplotaxis-dev.v212.abes.fr:11082/ : URL interne de l'adminer
 - test :
   - https://qualimarc-test.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc-test.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
   - http://diplotaxis-test.v202.abes.fr:11080/ : URL interne de qualimarc-front
   - http://diplotaxis-test.v202.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
+  - http://diplotaxis-test.v202.abes.fr:11082/ : URL interne de l'adminer
 - prod
   - https://qualimarc.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
   - http://diplotaxis-prod.v102.abes.fr:11080/ : URL interne de qualimarc-front
   - http://diplotaxis-prod.v102.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
-
+  - http://diplotaxis-prod.v102.abes.fr:11082/ : URL interne de l'adminer
 
 ## Prérequis
 
