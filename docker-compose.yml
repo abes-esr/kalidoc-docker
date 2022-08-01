@@ -50,9 +50,9 @@ services:
       # https://www.linkedin.com/pulse/externalizing-properties-spring-boot-application-docker-phani-bushan
       # pour la liste de tous les champs qu'on peut surcharger,
       # voir le contenu des application-xxx.properties embarqués dans le code sources
-      SPRING_DATASOURCE_QUALIMARC_JDBCURL: ${SPRING_DATASOURCE_QUALIMARC_JDBCURL}
-      SPRING_DATASOURCE_QUALIMARC_USERNAME: ${SPRING_DATASOURCE_QUALIMARC_USERNAME}
-      SPRING_DATASOURCE_QUALIMARC_PASSWORD: ${SPRING_DATASOURCE_QUALIMARC_PASSWORD}
+      SPRING_DATASOURCE_QUALIMARC_JDBCURL: 'jdbc:postgresql://qualimarc-db:5432/qualimarc'
+      SPRING_DATASOURCE_QUALIMARC_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_QUALIMARC_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_DATASOURCE_BASEXML_JDBCURL: ${SPRING_DATASOURCE_BASEXML_JDBCURL}
       SPRING_DATASOURCE_BASEXML_USERNAME: ${SPRING_DATASOURCE_BASEXML_USERNAME}
       SPRING_DATASOURCE_BASEXML_PASSWORD: ${SPRING_DATASOURCE_BASEXML_PASSWORD}
@@ -79,8 +79,8 @@ services:
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
-      POSTGRES_USER: "qualimarc"
-      POSTGRES_PASSWORD: "qualimarcsecret"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./volumes/qualimarc-db/pgdata/:/var/lib/postgresql/data/
     labels:
