@@ -107,8 +107,8 @@ services:
     environment:
       POSTGRES_HOST: "qualimarc-db"
       POSTGRES_DB: "qualimarc"
-      POSTGRES_USER: "qualimarc"
-      POSTGRES_PASSWORD: "qualimarcsecret"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_EXTRA_OPTS: "-Z6 --schema=public --blobs --clean"
       # pour tester toutes les minutes => SCHEDULE: "* * * * *"
       SCHEDULE: "@daily"
