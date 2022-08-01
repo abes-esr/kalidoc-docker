@@ -142,7 +142,7 @@ Les éléments suivants sont à sauvegarder:
 - ``/opt/pod/qualimarc-docker/.env`` : contient la configuration spécifique de notre déploiement
 - ``/opt/pod/qualimarc-docker/volumes/qualimarc-db/dump/`` : contient les dumps quotidiens de la base de données postgresql de qualimarc
 
-Il est possible de régler la fréquence et le moment de la génération des dump de postgresql en modifiant la variable : XXXXXTODOpréciser
+Il est possible de régler la fréquence et le moment de la génération des dump de postgresql en modifiant la variable ``SCHEDULE`` dans le [``docker-compose.yml``](https://github.com/abes-esr/qualimarc-docker/blob/e68650cf40acb966f82cda44fd6624056d8cf2be/docker-compose.yml#L113-L114)
 
 ## Développements
 
