@@ -13,6 +13,7 @@ Les URLs correspondantes aux déploiements en local, dev, test et prod de qualim
 - local :
   - http://127.0.0.1:11080/ : URL interne de qualimarc-front
   - http://127.0.0.1:11081/api/v1/143519379 : URL interne de qualimarc-api
+  - http://127.0.0.1:11082/ : URL interne de l'adminer
 - dev :
   - https://qualimarc-dev.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc-dev.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
