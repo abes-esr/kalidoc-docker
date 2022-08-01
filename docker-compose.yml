@@ -91,41 +91,45 @@ services:
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=postgresql"
 
 
-  ############################
-  # Dump de la base de données
-  # --------------------------
+  #######################################
+  # Dump de la base de données postgresql
+  # -------------------------------------
   # (dump tous les jours pour les sauvegardes)
-  # https://hub.docker.com/r/prodrigestivill/postgres-backup-local
+  # https://github.com/tiredofit/docker-db-backup
   qualimarc-db-dumper:
-    image: prodrigestivill/postgres-backup-local:14
+    image: tiredofit/db-backup:3.3.11
     container_name: qualimarc-db-dumper
     restart: unless-stopped
     volumes:
-        - ./volumes/qualimarc-db/dump/:/backups/
+        - ./volumes/qualimarc-db/dump/:/backup/
     depends_on:
         - qualimarc-db
     environment:
-      POSTGRES_HOST: "qualimarc-db"
-      POSTGRES_DB: "qualimarc"
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_EXTRA_OPTS: "-Z6 --schema=public --blobs --clean"
-      # pour tester toutes les minutes => SCHEDULE: "* * * * *"
-      SCHEDULE: "@daily"
-      TZ: "Europe/Paris"
-      BACKUP_KEEP_DAYS: 7
-      BACKUP_KEEP_WEEKS: 4
-      BACKUP_KEEP_MONTHS: 6
-      HEALTHCHECK_PORT: 8080
+      # DB_DUMP_BEGIN: "0130" <= tous les jours à 1h30 du matin GMT
+      # DB_DUMP_FREQ: 1440 <= chaque jour
+      # DB_CLEANUP_TIME: 10080 (1440*7) <= conserve uniquement les 7 derniers jours
+      DB_TYPE: "pgsql"
+      DB_HOST: "qualimarc-db"
+      DB_NAME: "qualimarc"
+      DB_USER: ${POSTGRES_USER}
+      DB_PASS: ${POSTGRES_PASSWORD}
+      DB_DUMP_BEGIN: "0130"
+      DB_DUMP_FREQ: 1440
+      DB_CLEANUP_TIME: 10080
+      SPLIT_DB: "true"
+      COMPRESSION: "GZ"
+      DEBUG_MODE: "false"
+      CONTAINER_ENABLE_SCHEDULING: "false"
+      CONTAINER_ENABLE_MONITORING: "false"
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=adhoc"
       # log multiline aussi pour ce conteneur avec des lignes qui ressemblent à ceci:
-      # 2021/08/13 15:24:42 15 cmd: /backup.sh
+      # 2022-08-01.14:55:00 [NOTICE] ** [db-backup] Dumping PostgresSQL database: 'qualimarc' and compressing with 'gzip'
       - "co.elastic.logs/multiline.type=pattern"
-      - "co.elastic.logs/multiline.pattern='^.*cmd: /backup.sh'"
+      - "co.elastic.logs/multiline.pattern='^.*Dumping PostgresSQL database.*$'"
       - "co.elastic.logs/multiline.negate=true"
       - "co.elastic.logs/multiline.match=after"
 
