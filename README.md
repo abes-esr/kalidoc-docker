@@ -92,6 +92,18 @@ cp .env-dist .env
 # ouvrez le fichier .env pour le personnaliser
 ```
 
+### Mise à jour de POSTGRES_PASSWORD
+
+Pour modifier la valeur du mot de passe de la base de données postgresql de qualimarc sur une base de données déjà initialisée (c'est à dire que le conteneur qualimarc-db a déjà été lancé une première fois), alors il est nécessaire de procéder en deux étapes :
+1) modifier la valeur de POSTGRES_PASSWORD dans votre fichier ``.env``
+2) lancer la commande suivante pour mettre à jour le mot de passe à l'interrieur de la base de données déjà initialisée (cela suppose que le conteneur ``qualimarc-db``  soit UP) :
+   ```bash
+   docker exec qualimarc-db psql -U qualimarc -c "alter user qualimarc with password 'qualimarcsecret2';"
+   ```
+3) relancer l'application pour que le mot de passe POSTGRES_PASSWORD soit pris en compte dans tous les conteneurs : 
+   ```bash
+   docker-compose up -d
+   ```
 
 ## Déploiement continu
 
