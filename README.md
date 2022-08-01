@@ -100,7 +100,7 @@ Pour modifier la valeur du mot de passe de la base de données postgresql de qua
    ```bash
    docker exec qualimarc-db psql -U qualimarc -c "alter user qualimarc with password 'qualimarcsecret2';"
    ```
-3) relancer l'application pour que le mot de passe POSTGRES_PASSWORD soit pris en compte dans tous les conteneurs : 
+3) relancer l'application pour que la variable ``POSTGRES_PASSWORD`` soit injectée dans tous les conteneurs qui en ont besoin : 
    ```bash
    docker-compose up -d
    ```
