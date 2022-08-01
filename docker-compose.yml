@@ -129,7 +129,7 @@ services:
       # log multiline aussi pour ce conteneur avec des lignes qui ressemblent à ceci:
       # 2022-08-01.14:55:00 [NOTICE] ** [db-backup] Dumping PostgresSQL database: 'qualimarc' and compressing with 'gzip'
       - "co.elastic.logs/multiline.type=pattern"
-      - "co.elastic.logs/multiline.pattern='^.*Dumping PostgresSQL database.*$'"
+      - "co.elastic.logs/multiline.pattern='^.*Dumping PostgresSQL database'"
       - "co.elastic.logs/multiline.negate=true"
       - "co.elastic.logs/multiline.match=after"
 
