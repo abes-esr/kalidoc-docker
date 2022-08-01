@@ -105,6 +105,8 @@ Pour modifier la valeur du mot de passe de la base de données postgresql de qua
    docker-compose up -d
    ```
 
+A noter que la valeur de ``POSTGRES_USER`` ne doit pas être modifiée car la mise à jour ne serait alors pas prise en compte par ``qualimarc-db``.
+
 ## Déploiement continu
 
 Les objectifs des déploiements continus de qualimarc sont les suivants (cf [poldev](https://github.com/abes-esr/abes-politique-developpement/blob/main/01-Gestion%20du%20code%20source.md#utilisation-des-branches)) :
