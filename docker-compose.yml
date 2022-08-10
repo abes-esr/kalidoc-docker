@@ -1,12 +1,12 @@
 #
-# Ci-dessous la config qui permet de lancer qualimarc
+# Ci-dessous la config qui permet de lancer qualimarc-docker
 #
 # Remarque: avant de lancer docker-compose up, il faut régler le fichier .env
 # en partant du fichier .env-dist qui donne les variables d'environnements
 # à personnaliser et des exemples de valeurs.
 #
 
-version: "3"
+version: "3.5"
 
 services:
 
@@ -19,7 +19,7 @@ services:
     container_name: qualimarc-front
     restart: unless-stopped
     environment:
-      QUALIMARC_VUE_APP_ROOT_API: ${QUALIMARC_VUE_APP_ROOT_API}
+      QUALIMARC_FRONT_API_BASEURL: ${QUALIMARC_FRONT_API_BASEURL}
     ports:
       - ${QUALIMARC_FRONT_HTTP_PORT}:80
     depends_on:
@@ -37,9 +37,9 @@ services:
 
 
   ############################
+  # qualimarc-api
   # API de qualimarc
-  # --------------------------
-  # (basé sur spring boot)
+  # (écrite en java spring boot)
   qualimarc-api:
     image: abesesr/qualimarc:${QUALIMARC_API_VERSION}
     container_name: qualimarc-api
@@ -48,18 +48,18 @@ services:
       # Pour basculer sur bon application-xxx.properties préalablement embarqué
       # dans le code ici:
       # https://github.com/abes-esr/abes-hello-back/tree/develop/web/src/main/resources/
-      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      SPRING_PROFILES_ACTIVE: ${QUALIMARC_API_SPRING_PROFILES_ACTIVE}
       # Pour surcharger les paramètres spring du application-xxx.properties
       # ci-dessous via le système de .env de docker
       # https://www.linkedin.com/pulse/externalizing-properties-spring-boot-application-docker-phani-bushan
       # pour la liste de tous les champs qu'on peut surcharger,
       # voir le contenu des application-xxx.properties embarqués dans le code sources
       SPRING_DATASOURCE_QUALIMARC_JDBCURL: 'jdbc:postgresql://qualimarc-db:5432/qualimarc'
-      SPRING_DATASOURCE_QUALIMARC_USERNAME: ${POSTGRES_USER}
-      SPRING_DATASOURCE_QUALIMARC_PASSWORD: ${POSTGRES_PASSWORD}
-      SPRING_DATASOURCE_BASEXML_JDBCURL: ${SPRING_DATASOURCE_BASEXML_JDBCURL}
-      SPRING_DATASOURCE_BASEXML_USERNAME: ${SPRING_DATASOURCE_BASEXML_USERNAME}
-      SPRING_DATASOURCE_BASEXML_PASSWORD: ${SPRING_DATASOURCE_BASEXML_PASSWORD}
+      SPRING_DATASOURCE_QUALIMARC_USERNAME: ${QUALIMARC_DB_POSTGRES_USER}
+      SPRING_DATASOURCE_QUALIMARC_PASSWORD: ${QUALIMARC_DB_POSTGRES_PASSWORD}
+      SPRING_DATASOURCE_BASEXML_JDBCURL: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_JDBCURL}
+      SPRING_DATASOURCE_BASEXML_USERNAME: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_USERNAME}
+      SPRING_DATASOURCE_BASEXML_PASSWORD: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_PASSWORD}
     ports:
       - ${QUALIMARC_API_HTTP_PORT}:8082
     depends_on:
@@ -77,9 +77,8 @@ services:
 
 
   ##############################
-  # Base de données de qualimarc
-  # ----------------------------
-  # (basé sur un conteneur postgresql)
+  # qualimarc-db
+  # Base de données postgresql de qualimarc
   qualimarc-db:
     image: abesesr/postgres-fr_fr:14.3.0
     container_name: qualimarc-db
@@ -87,8 +86,8 @@ services:
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${QUALIMARC_DB_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${QUALIMARC_DB_POSTGRES_PASSWORD}
     volumes:
       - ./volumes/qualimarc-db/pgdata/:/var/lib/postgresql/data/
     labels:
@@ -100,9 +99,27 @@ services:
 
 
 
+  #################################
+  # qualimarc-db-adminer
+  # Interface d'admin de postgresql
+  qualimarc-db-adminer:
+    image: adminer:4.8.1
+    container_name: qualimarc-db-adminer
+    restart: unless-stopped
+    ports:
+      - ${QUALIMARC_DB_ADMINER_HTTP_PORT}:8080
+    depends_on:
+      - qualimarc-db
+    environment:
+      ADMINER_DEFAULT_SERVER: "qualimarc-db"
+    logging:
+      driver: none # pas de log pour adminer pour ne pas polluer
+
+
+
   #######################################
+  # qualimarc-db-dumper
   # Dump de la base de données postgresql
-  # -------------------------------------
   # (dump tous les jours pour les sauvegardes)
   # https://github.com/tiredofit/docker-db-backup
   qualimarc-db-dumper:
@@ -120,8 +137,8 @@ services:
       DB_TYPE: "pgsql"
       DB_HOST: "qualimarc-db"
       DB_NAME: "qualimarc"
-      DB_USER: ${POSTGRES_USER}
-      DB_PASS: ${POSTGRES_PASSWORD}
+      DB_USER: ${QUALIMARC_DB_POSTGRES_USER}
+      DB_PASS: ${QUALIMARC_DB_POSTGRES_PASSWORD}
       DB_DUMP_BEGIN: "0130"
       DB_DUMP_FREQ: 1440
       DB_CLEANUP_TIME: 10080
@@ -143,4 +160,33 @@ services:
       - "co.elastic.logs/multiline.match=after"
 
 
+
+  #######################################
+  # qualimarc-watchtower
+  # Conteneur chargé de mettre à jour automatiquement toutes les 10 secondes 
+  # les images docker des conteneurs qualimarc-api qualimarc-front (passés en paramètre)
+  # cela permet de faire du déploiement continue en attendant les déploiement Ansible 
+  # ce conteneur devra donc être supprimé une fois que le déploiement Ansible sera en place
+  # plus d'info : https://containrrr.dev/watchtower
+  # cf README.md pour explications : https://github.com/abes-esr/qualimarc-docker#d%C3%A9ploiement-continu
+  qualimarc-watchtower:
+    image: containrrr/watchtower:1.4.0
+    container_name: qualimarc-watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_POLL_INTERVAL: 60
+      WATCHTOWER_DEBUG: "false"
+      WATCHTOWER_NO_STARTUP_MESSAGE: "true"
+      WATCHTOWER_WARN_ON_HEAD_FAILURE: "never"
+      WATCHTOWER_RUN_ONCE: ${QUALIMARC_WATCHTOWER_RUN_ONCE}
+      WATCHTOWER_NOTIFICATIONS: "slack"
+      WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL: ${QUALIMARC_WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL}
+      WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER: ${QUALIMARC_WATCHTOWER_NOTIFICATION_SLACK_IDENTIFIER}
+      WATCHTOWER_NOTIFICATION_SLACK_CHANNEL: "#notif-qualimarc"
+      WATCHTOWER_SCOPE: "qualimarc-watchtower-scope"
+    labels:
+      - "com.centurylinklabs.watchtower.scope=qualimarc-watchtower-scope"
 
