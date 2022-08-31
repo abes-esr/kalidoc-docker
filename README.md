@@ -55,6 +55,8 @@ cp .env-dist .env
 # personnaliser alors le contenu du .env
 ```
 
+**Note : les mots de passe de la base de donnée xml de test ne sont pas présent dans le fichier au moment de la copie. Vous devez aller les renseigner manuellement en editant le fichier dans la console avec nano par exemple**
+
 Démarrer l'application :
 ```bash
 cd /opt/pod/qualimarc-docker/
