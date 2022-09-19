@@ -48,7 +48,7 @@ cd /opt/pod/
 git clone https://github.com/abes-esr/qualimarc-docker.git
 ```
 
-Configurer l'application depuis l'exemple du [fichier ``.env-dist``](./.env-dist) :
+Configurer l'application depuis l'exemple du [fichier ``.env-dist``](./.env-dist) (ce fichier contient la liste des variables avec des explications et des exemples de valeurs) :
 ```bash
 cd /opt/pod/qualimarc-docker/
 cp .env-dist .env
@@ -79,22 +79,29 @@ Remarque : retirer le ``-d`` pour voir passer les logs dans le terminal et utili
 # pour stopper l'application
 cd /opt/pod/qualimarc-docker/
 docker-compose stop
+
+
+# pour redémarrer l'application
+cd /opt/pod/qualimarc-docker/
+docker-compose restart
 ```
+
+## Supervision
+
+```bash
+# pour visualiser les logs de l'appli
+cd /opt/pod/qualimarc-docker/
+docker-compose logs -f --tail=100
+```
+
+Cela va afficher les 100 dernière lignes de logs générées par l'application et toutes les suivantes jusqu'au CTRL+C qui stoppera l'affichage temps réel des logs.
+
 
 ## Configuration
 
-Pour configurer l'application, vous devez créer et personnaliser un fichier ``/opt/pod/qualimarc-docker/.env``.
+Pour configurer l'application, vous devez créer et personnaliser un fichier ``/opt/pod/qualimarc-docker/.env`` (cf section [Installation](#installation)). Les paramètres à placer dans ce fichier ``.env`` et des exemples de valeurs sont indiqués dans le fichier [``.env-dist``](https://github.com/abes-esr/qualimarc-docker/blob/develop/.env-dist)
 
-Les paramètres à placer dans le ``.env`` et des exemples de valeurs sont indiqués dans ce fichier [``.env-dist``](https://github.com/abes-esr/qualimarc-docker/blob/develop/.env-dist)
-
-Pour configurer votre application, le mieux est de procéder ici :
-```bash
-cd /opt/pod/qualimarc-docker/
-cp .env-dist .env
-# ouvrez le fichier .env pour le personnaliser
-```
-
-### Mise à jour de POSTGRES_PASSWORD
+### Spécificité pour la mise à jour de POSTGRES_PASSWORD
 
 Pour modifier la valeur du mot de passe de la base de données postgresql de qualimarc sur une base de données déjà initialisée (c'est à dire que le conteneur ``qualimarc-db`` a déjà été lancé une première fois), il est nécessaire de procéder en deux étapes :
 1) modifier la valeur de ``POSTGRES_PASSWORD`` dans votre fichier ``.env``
@@ -126,17 +133,6 @@ QUALIMARC_WATCHTOWER_RUN_ONCE=false
 Le fonctionnement de watchtower est de surveiller régulièrement l'éventuelle présence d'une nouvelle image docker de ``qualimarc-api`` et ``qualimarc-front``, si oui, de récupérer l'image en question, de stopper le ou les les vieux conteneurs et de créer le ou les conteneurs correspondants en réutilisant les mêmes paramètres ceux des vieux conteneurs. Pour le développeur, il lui suffit de faire un git commit+push par exemple sur la branche ``develop`` d'attendre que la github action build et publie l'image, puis que watchtower prenne la main pour que la modification soit disponible sur l'environnement cible, par exemple la machine ``diplotaxis1-dev``.
 
 Le fait de passer ``QUALIMARC_WATCHTOWER_RUN_ONCE`` à false va faire en sorte d'exécuter périodiquement watchtower. Par défaut cette variable est à ``true`` car ce n'est pas utile voir cela peut générer du bruit dans le cas d'un déploiement sur un PC en local.
-
-## Supervision
-
-
-```bash
-# pour visualiser les logs de l'appli
-cd /opt/pod/qualimarc-docker/
-docker-compose logs -f --tail=100
-```
-
-Cela va afficher les 100 dernière lignes de logs générées par l'application et toutes les suivantes jusqu'au CTRL+C qui stoppera l'affichage temps réel des logs.
 
 ## Sauvegardes
 
