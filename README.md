@@ -68,7 +68,8 @@ Pour information, une base de données postgresql vide sera alors automatiquemen
 ## Démarrage et arrêt
 
 ```bash
-# pour démarrer l'application
+# pour démarrer l'application (ou pour appliquer des modifications 
+# faites dans /opt/pod/qualimarc-docker/.env)
 cd /opt/pod/qualimarc-docker/
 docker-compose up -d
 ```
