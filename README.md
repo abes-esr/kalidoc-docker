@@ -124,9 +124,7 @@ Les objectifs des déploiements continus de qualimarc sont les suivants (cf [pol
 - git push (le plus couramment merge) sur la branche ``main`` provoque un déploiement automatique sur le serveur ``diplotaxis1-test``
 - git tag X.X.X (associé à une release) sur la branche ``main`` permet un déploiement (non automatique) sur le serveur ``diplotaxis1-prod``
 
-Pour un déploiement continu de qualimarc, il est prévu (non implémenté à la date de juillet 2022), d'utiliser des playbook Ansible branchés sur les webhook des Github Action pour pouvoir savoir quand déployer quoi.
-
-En attendant la mise en place d'Ansible pour qualimarc-docker, il a été décidé de déployer automatiquement ``qualimarc-docker`` en utilisant l'outil watchtower. Pour permettre ce déploiement automatique avec watchtower, il suffit de positionner à ``false`` la variable suivante dans le fichier ``/opt/pod/qualimarc-docker/.env`` :
+Qualimarc est déployé automatiquement en utilisant l'outil watchtower. Pour permettre ce déploiement automatique avec watchtower, il suffit de positionner à ``false`` la variable suivante dans le fichier ``/opt/pod/qualimarc-docker/.env`` :
 ```env
 QUALIMARC_WATCHTOWER_RUN_ONCE=false
 ```
