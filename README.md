@@ -4,6 +4,8 @@
 
 Qualimarc est l'outil de diagnostic des notices du Sudoc.
 
+![qualimarc](https://user-images.githubusercontent.com/328244/203315079-4cabb49a-58a8-4778-80b5-d789e48fb94d.PNG)
+
 Ce dépôt contient la configuration docker 🐳 pour déployer l'application qualimarc (cf sources de l'[api](https://github.com/abes-esr/qualimarc-api) et du [front](https://github.com/abes-esr/qualimarc-front)) en local sur le poste d'un développeur, ou bien sur les serveurs de dev, test et prod. 
 
 ## URLs de qualimarc
