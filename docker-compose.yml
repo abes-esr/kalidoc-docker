@@ -77,6 +77,31 @@ services:
       - "com.centurylinklabs.watchtower.scope=qualimarc-watchtower-scope"
 
 
+  qualimarc-batch:
+    image: abesesr/qualimarc:${QUALIMARC_BATCH_VERSION}
+    container_name: qualimarc-batch
+    restart: unless-stopped
+    environment:
+      QUALIMARC_BATCH_AT_STARTUP: ${QUALIMARC_BATCH_AT_STARTUP}
+      QUALIMARC_BATCH_CRON: ${QUALIMARC_BATCH_CRON}
+      # Pour basculer sur bon application-xxx.properties préalablement embarqué
+      # dans le code ici:
+      # https://github.com/abes-esr/abes-hello-back/tree/develop/batch/src/main/resources/
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      # Pour surcharger les paramètres spring du application-xxx.properties
+      # ci-dessous via le système de .env de docker
+      # https://www.linkedin.com/pulse/externalizing-properties-spring-boot-application-docker-phani-bushan
+      # pour la liste de tous les champs qu'on peut surcharger,
+      # voir le contenu des application-xxx.properties embarqués dans le code sources
+      SPRING_DATASOURCE_URL: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_JDBCURL}
+      SPRING_DATASOURCE_USERNAME: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_PASSWORD}
+    labels:
+      # pour envoyer les logs dans le puits de log de l'abes
+      - "co.elastic.logs/enabled=true"
+      - "co.elastic.logs/processors.add_fields.target="
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=java-spring"
 
   ##############################
   # qualimarc-db
@@ -189,4 +214,6 @@ services:
       WATCHTOWER_SCOPE: "qualimarc-watchtower-scope"
     labels:
       - "com.centurylinklabs.watchtower.scope=qualimarc-watchtower-scope"
+
+
 
