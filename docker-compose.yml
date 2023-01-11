@@ -93,9 +93,9 @@ services:
       # https://www.linkedin.com/pulse/externalizing-properties-spring-boot-application-docker-phani-bushan
       # pour la liste de tous les champs qu'on peut surcharger,
       # voir le contenu des application-xxx.properties embarqués dans le code sources
-      SPRING_DATASOURCE_URL: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_JDBCURL}
-      SPRING_DATASOURCE_USERNAME: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${QUALIMARC_API_SPRING_DATASOURCE_BASEXML_PASSWORD}
+      SPRING_DATASOURCE_QUALIMARC_JDBCURL: 'jdbc:postgresql://qualimarc-db:5432/qualimarc'
+      SPRING_DATASOURCE_QUALIMARC_USERNAME: ${QUALIMARC_DB_POSTGRES_USER}
+      SPRING_DATASOURCE_QUALIMARC_PASSWORD: ${QUALIMARC_DB_POSTGRES_PASSWORD}
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
@@ -110,6 +110,8 @@ services:
     image: abesesr/postgres-fr_fr:14.3.0
     container_name: qualimarc-db
     restart: unless-stopped
+    ports:
+      - 5432:5432
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
