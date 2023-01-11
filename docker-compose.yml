@@ -84,6 +84,7 @@ services:
     environment:
       QUALIMARC_BATCH_AT_STARTUP: ${QUALIMARC_BATCH_AT_STARTUP}
       QUALIMARC_BATCH_CRON: ${QUALIMARC_BATCH_CRON}
+      QUALIMARC_BATCH_CRON_FLUSH: ${QUALIMARC_BATCH_CRON_FLUSH}
       # Pour basculer sur bon application-xxx.properties préalablement embarqué
       # dans le code ici:
       # https://github.com/abes-esr/abes-hello-back/tree/develop/batch/src/main/resources/
@@ -110,8 +111,6 @@ services:
     image: abesesr/postgres-fr_fr:14.3.0
     container_name: qualimarc-db
     restart: unless-stopped
-    ports:
-      - 5432:5432
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
