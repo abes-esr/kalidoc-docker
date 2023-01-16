@@ -81,6 +81,8 @@ services:
     image: abesesr/qualimarc:${QUALIMARC_BATCH_VERSION}
     container_name: qualimarc-batch
     restart: unless-stopped
+    volumes:
+      - ${QUALIMARC_BATCH_STAT_WORKDIR}:/stat/
     environment:
       QUALIMARC_BATCH_AT_STARTUP: ${QUALIMARC_BATCH_AT_STARTUP}
       QUALIMARC_BATCH_CRON: ${QUALIMARC_BATCH_CRON}
