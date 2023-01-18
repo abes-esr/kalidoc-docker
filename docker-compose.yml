@@ -105,6 +105,7 @@ services:
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=java-spring"
+      - "com.centurylinklabs.watchtower.scope=qualimarc-watchtower-scope"
 
   ##############################
   # qualimarc-db
