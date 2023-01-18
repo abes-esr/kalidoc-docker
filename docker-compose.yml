@@ -105,6 +105,8 @@ services:
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=qualimarc"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=java-spring"
+      # pour que les mises à jour de cette image soient auto-déployées
+      # par watchtower cf docker-compose.watchtower.yml
       - "com.centurylinklabs.watchtower.scope=qualimarc-watchtower-scope"
 
   ##############################
