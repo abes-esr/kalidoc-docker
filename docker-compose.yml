@@ -18,6 +18,7 @@ services:
     image: abesesr/qualimarc:${QUALIMARC_FRONT_VERSION}
     container_name: qualimarc-front
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     environment:
       QUALIMARC_FRONT_API_BASEURL: ${QUALIMARC_FRONT_API_BASEURL}
     ports:
@@ -43,6 +44,7 @@ services:
     image: abesesr/qualimarc:${QUALIMARC_API_VERSION}
     container_name: qualimarc-api
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     environment:
       # Pour basculer sur bon application-xxx.properties préalablement embarqué
       # dans le code ici:
@@ -79,6 +81,7 @@ services:
     image: abesesr/qualimarc:${QUALIMARC_BATCH_VERSION}
     container_name: qualimarc-batch
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     volumes:
       - ${QUALIMARC_BATCH_STAT_WORKDIR}:/stat/
     environment:
@@ -113,6 +116,7 @@ services:
     image: abesesr/postgres-fr_fr:14.3.0
     container_name: qualimarc-db
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
@@ -136,6 +140,7 @@ services:
     image: adminer:4.8.1
     container_name: qualimarc-db-adminer
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     ports:
       - ${QUALIMARC_DB_ADMINER_HTTP_PORT}:8080
     depends_on:
@@ -156,6 +161,7 @@ services:
     image: tiredofit/db-backup:3.3.11
     container_name: qualimarc-db-dumper
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     volumes:
         - ./volumes/qualimarc-db/dump/:/backup/
     depends_on:
@@ -201,6 +207,7 @@ services:
     image: containrrr/watchtower:1.4.0
     container_name: qualimarc-watchtower
     restart: unless-stopped
+    mem_limit: ${MEM_LIMIT}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
