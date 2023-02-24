@@ -163,7 +163,7 @@ services:
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
     volumes:
-        - ./volumes/qualimarc-db/dump/:/backup/
+        - ${QUALIMARC_DB_DUMP_WORKDIR}:/backup/
     depends_on:
         - qualimarc-db
     environment:
