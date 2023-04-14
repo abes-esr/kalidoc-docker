@@ -19,6 +19,8 @@ services:
     container_name: qualimarc-front
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     environment:
       QUALIMARC_FRONT_API_BASEURL: ${QUALIMARC_FRONT_API_BASEURL}
     ports:
@@ -45,6 +47,8 @@ services:
     container_name: qualimarc-api
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     environment:
       # Pour basculer sur bon application-xxx.properties préalablement embarqué
       # dans le code ici:
@@ -82,6 +86,8 @@ services:
     container_name: qualimarc-batch
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     volumes:
       - ${QUALIMARC_BATCH_STAT_WORKDIR}:/stat/
     environment:
@@ -117,6 +123,8 @@ services:
     container_name: qualimarc-db
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     environment:
       # cf https://github.com/docker-library/docs/blob/master/postgres/README.md#environment-variables
       POSTGRES_DB: "qualimarc"
@@ -141,6 +149,8 @@ services:
     container_name: qualimarc-db-adminer
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     ports:
       - ${QUALIMARC_DB_ADMINER_HTTP_PORT}:8080
     depends_on:
@@ -162,6 +172,8 @@ services:
     container_name: qualimarc-db-dumper
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     volumes:
         - ${QUALIMARC_DB_DUMP_WORKDIR}:/backup/
     depends_on:
@@ -208,6 +220,8 @@ services:
     container_name: qualimarc-watchtower
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
