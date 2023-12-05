@@ -138,7 +138,8 @@ services:
       - ./volumes/qualimarc-db/pgdata/:/var/lib/postgresql/data/
     # todo delete( test en dev)
     ports:
-      - 11083:5432
+      - 5432:5432
+      #- 11083:5432
     labels:
       # pour envoyer les logs dans le puits de log de l'abes
       - "co.elastic.logs/enabled=true"
