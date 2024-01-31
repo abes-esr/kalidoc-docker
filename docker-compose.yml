@@ -183,7 +183,7 @@ services:
     memswap_limit: ${MEM_LIMIT}
     cpus: ${CPU_LIMIT}
     volumes:
-        - ${QUALIMARC_DB_DUMP_WORKDIR}:/backup/
+        - ./volumes/qualimarc-db/dump/:/backup/
     depends_on:
         - qualimarc-db
     environment:
