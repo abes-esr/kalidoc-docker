@@ -185,7 +185,6 @@ services:
     volumes:
         - ./volumes/qualimarc-db/dump/:/backup/
         - ./script/:/script/
-    command: chmod +x /script/script.sh
     depends_on:
         - qualimarc-db
     environment:
