@@ -36,7 +36,7 @@ echo "execution du script"
 
 # Construire le message JSON
 message="{
-\"text\":\"Code : ${EXIT_CODE}, le fichier : ${BACKUP_FILENAME} taille : ${BACKUP_FILESIZE} octets\",
+\"text\":\"ATTENTION ! le fichier : ${BACKUP_FILENAME} de ${BACKUP_FILESIZE} octets est surement VIDE à vérifier.\",
 }"
 
 # Envoyer la notification à Slack si en dessous de 50bytes
