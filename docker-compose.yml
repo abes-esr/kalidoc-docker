@@ -184,6 +184,7 @@ services:
     cpus: ${CPU_LIMIT}
     volumes:
         - ./volumes/qualimarc-db/dump/:/backup/
+        - ./script/:/script/
     depends_on:
         - qualimarc-db
     environment:
@@ -203,6 +204,8 @@ services:
       DEBUG_MODE: "false"
       CONTAINER_ENABLE_SCHEDULING: "false"
       CONTAINER_ENABLE_MONITORING: "false"
+      POST_SCRIPT: /script/script.sh
+      ENV_FILE_PATH: .env
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
