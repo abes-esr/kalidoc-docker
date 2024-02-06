@@ -1,8 +1,6 @@
 #!/bin/bash
-
 # Chemin vers le fichier .env
 ENV_FILE_PATH="$ENV_FILE_PATH"
-
 # Charge les variables d'environnement depuis le fichier .env s'il existe
 if [ -f "$ENV_FILE_PATH" ]; then
     source "$ENV_FILE_PATH"
@@ -40,6 +38,7 @@ message="{
 }"
 
 # Envoyer la notification à Slack si en dessous de 50bytes
-if [ $BACKUP_FILESIZE -lt 50 ]; then
-        curl -X POST -H "Content-Type: application/json" -d "$message" "$NOTIFICATION_SLACK_HOOK_URL"
+if [ $BACKUP_FILESIZE -lt 50 ];
+then
+  curl -X POST -H "Content-Type: application/json" -d "$message" "$NOTIFICATION_SLACK_HOOK_URL"
 fi
