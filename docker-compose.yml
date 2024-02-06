@@ -199,12 +199,11 @@ services:
       DEFAULT_BACKUP_BEGIN: "0130"
       DEFAULT_BACKUP_INTERVAL: 1440
       DEFAULT_CLEANUP_TIME: 10080
-      SPLIT_DB: "true"
-      COMPRESSION: "GZ"
+      DEFAULT_COMPRESSION: "GZ"
       DEBUG_MODE: "false"
       CONTAINER_ENABLE_SCHEDULING: "false"
       CONTAINER_ENABLE_MONITORING: "false"
-      POST_SCRIPT: /script/script.sh
+      DEFAULT_SCRIPT_LOCATION_POST: /script/script.sh
       ENV_FILE_PATH: .env
     labels:
       - "co.elastic.logs/enabled=true"
