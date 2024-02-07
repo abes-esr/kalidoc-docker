@@ -1,10 +1,5 @@
 #!/bin/bash
-# Chemin vers le fichier .env
-ENV_FILE_PATH="$ENV_FILE_PATH"
-# Charge les variables d'environnement depuis le fichier .env s'il existe
-if [ -f "$ENV_FILE_PATH" ]; then
-    source "$ENV_FILE_PATH"
-fi
+NOTIFICATION_SLACK_HOOK_URL="$NOTIFICATION_SLACK_HOOK_URL"
 
 # #### Example Post Script
 # #### $1=EXIT_CODE (After running backup routine)
@@ -30,15 +25,11 @@ BACKUP_FILESIZE=$9
 HASH=${10}
 MOVE_EXIT_CODE=${11}
 
-echo "execution du script"
-
 # Construire le message JSON
-message="{
-\"text\":\"ATTENTION ! le fichier : ${BACKUP_FILENAME} de ${BACKUP_FILESIZE} octets est surement VIDE à vérifier.\",
-}"
+message="{\"text\":\"ATTENTION ! le fichier : ${BACKUP_FILENAME} de ${BACKUP_FILESIZE} octets est surement VIDE à vérifier.\"}"
 
 # Envoyer la notification à Slack si en dessous de 50bytes
 if [ $BACKUP_FILESIZE -lt 50 ];
 then
-  curl -X POST -H "Content-Type: application/json" -d "$message" "$NOTIFICATION_SLACK_HOOK_URL"
+  curl -X POST -H "Content-Type: application/json" -d "$message" $NOTIFICATION_SLACK_HOOK_URL
 fi
