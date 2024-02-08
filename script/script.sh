@@ -1,7 +1,6 @@
 #!/bin/bash
 NOTIFICATION_SLACK_HOOK_URL="$NOTIFICATION_SLACK_HOOK_URL"
 
-# #### Example Post Script
 # #### $1=EXIT_CODE (After running backup routine)
 # #### $2=DB_TYPE (Type of Backup)
 # #### $3=DB_HOST (Backup Host)
@@ -20,7 +19,7 @@ DB_NAME=$4
 BACKUP_START_TIME=$5
 BACKUP_FINISH_TIME=$6
 BACKUP_TOTAL_TIME=$7
-BACKUP_FILENAME=${8}
+BACKUP_FILENAME=$8
 BACKUP_FILESIZE=$9
 HASH=${10}
 MOVE_EXIT_CODE=${11}
