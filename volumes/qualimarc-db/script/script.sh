@@ -1,6 +1,6 @@
 #!/bin/bash
 NOTIFICATION_SLACK_HOOK_URL="$NOTIFICATION_SLACK_HOOK_URL"
-ENV="$ENV"
+NOTIFICATION_SLACK_IDENTIFIER="$NOTIFICATION_SLACK_IDENTIFIER"
 # #### $1=EXIT_CODE (After running backup routine)
 # #### $2=DB_TYPE (Type of Backup)
 # #### $3=DB_HOST (Backup Host)
@@ -25,7 +25,7 @@ HASH=${10}
 MOVE_EXIT_CODE=${11}
 
 # Construire le message JSON
-message="{\"text\":\"ATTENTION ${ENV}! le fichier : ${BACKUP_FILENAME} fait que ${BACKUP_FILESIZE} octets, la backup est sûrement VIDE.\"}"
+message="{\"text\":\"ATTENTION ${NOTIFICATION_SLACK_IDENTIFIER}! le fichier : ${BACKUP_FILENAME} fait que ${BACKUP_FILESIZE} octets, la backup est sûrement VIDE.\"}"
 
 # Envoyer la notification à Slack si en dessous de 50bytes
 if [ $BACKUP_FILESIZE -lt 50 ];

@@ -184,7 +184,7 @@ services:
     cpus: ${CPU_LIMIT}
     volumes:
         - ./volumes/qualimarc-db/dump/:/backup/
-        - ./script/:/assets/scripts/post/
+        - ./volumes/qualimarc-db/script/:/assets/scripts/post/
     depends_on:
         - qualimarc-db
     environment:
@@ -204,8 +204,8 @@ services:
       CONTAINER_ENABLE_SCHEDULING: "false"
       CONTAINER_ENABLE_MONITORING: "false"
       DEFAULT_SCRIPT_LOCATION_POST: /assets/scripts/post/script.sh
-      NOTIFICATION_SLACK_HOOK_URL: ${NOTIFICATION_SLACK_HOOK_URL}
-      ENV: ${QUALIMARC_API_SPRING_PROFILES_ACTIVE}
+      NOTIFICATION_SLACK_HOOK_URL: ${QUALIMARC_DB_DUMPER_NOTIFICATION_SLACK_HOOK_URL}
+      NOTIFICATION_SLACK_IDENTIFIER: ${QUALIMARC_DB_DUMPER_NOTIFICATION_SLACK_IDENTIFIER}
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
