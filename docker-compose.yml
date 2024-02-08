@@ -205,6 +205,7 @@ services:
       CONTAINER_ENABLE_MONITORING: "false"
       DEFAULT_SCRIPT_LOCATION_POST: /assets/scripts/post/script.sh
       NOTIFICATION_SLACK_HOOK_URL: ${NOTIFICATION_SLACK_HOOK_URL}
+      ENV: ${QUALIMARC_API_SPRING_PROFILES_ACTIVE}
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
