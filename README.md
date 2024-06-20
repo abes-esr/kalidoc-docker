@@ -19,21 +19,12 @@ Les URLs correspondantes aux déploiements en local, dev, test et prod de qualim
 - dev :
   - https://qualimarc-dev.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc-dev.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
-  - http://diplotaxis1-dev.v212.abes.fr:11080/ : URL interne de qualimarc-front
-  - http://diplotaxis1-dev.v212.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
-  - http://diplotaxis1-dev.v212.abes.fr:11082/ : URL interne de l'adminer
 - test :
   - https://qualimarc-test.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc-test.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
-  - http://diplotaxis1-test.v202.abes.fr:11080/ : URL interne de qualimarc-front
-  - http://diplotaxis1-test.v202.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
-  - http://diplotaxis1-test.v202.abes.fr:11082/ : URL interne de l'adminer
 - prod
   - https://qualimarc.sudoc.fr : homepage de qualimarc (qualimarc-front)
   - https://qualimarc.sudoc.fr/api/v1/143519379 : API de qualimarc (qualimarc-api)
-  - http://diplotaxis1-prod.v102.abes.fr:11080/ : URL interne de qualimarc-front
-  - http://diplotaxis1-prod.v102.abes.fr:11081/api/v1/143519379 : URL interne de qualimarc-api
-  - http://diplotaxis1-prod.v102.abes.fr:11082/ : URL interne de l'adminer
 
 ## Prérequis
 
@@ -171,9 +162,6 @@ docker-compose up -d
 ### Admin de postgresql
 Pour consulter l'interface d'admin web de postgresql (basée sur [Adminer](https://www.adminer.org/)) rendez vous sur cette URL : 
 - local : http://127.0.0.1:11082/
-- dev : http://diplotaxis1-dev.v212.abes.fr:11082/
-- test : http://diplotaxis1-test.v202.abes.fr:11082/
-- prod : http://diplotaxis1-prod.v102.abes.fr:11082/
 
 
 Vous devriez obtenir une interface qui ressemble à ceci:  
