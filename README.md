@@ -133,20 +133,29 @@ Le répertoire suivant est à exclure des sauvegardes :
 
 ### Restauration depuis une sauvegarde
 
-Réinstallez l'application qualimarc depuis la [procédure d'installation ci-dessus](#installation) et récupéré depuis les sauvegardes le fichier ``.env`` et placez le dans ``/opt/pod/qualimarc-docker/.env`` sur la machine qui doit faire repartir qualimarc.
+- #### Si on a plus aucun contenair ni de docker-compose.yml
 
-Restaurez ensuite le dernier dump de la base de données postgresql de qualimarc :
-- récupérer le dernier dump généré par ``qualimarc-db-dumper`` depuis le système de sauvegarde (le fichier dump ressemble à ceci ``pgsql_qualimarc_qualimarc-db_20220801-143201.sql.gz``) et placez le fichier dump récupéré (sans le décompresser) dans ``/opt/pod/qualimarc-docker/volumes/qualimarc-db/dump/`` sur la machine qui doit faire repartir qualimarc
-- ensuite lancez uniquement les conteneurs ``qualimarc-db`` et ``qualimarc-db-dumper`` :
+Dans ce cas, cloner ce projet sur un serveur ayant acces au commande docker et git,
+et demander au SIRE s'ils ont acces à une sauvegarde du ``.env`` afin de mettre ce fichier ``.env`` dans le repertoire ``qualimarc-docker``.  
+
+- #### Si la base de donnée qualimarc-db est vide
+
+Dans ce cas, si le repertoire ``../volumes/qualimarc-db/dump/`` n'est pas disponible, alors il faut lancer uniquement les conteneurs ``qualimarc-db`` et ``qualimarc-db-dumper`` pour qu'il créé et s'associe au repertoire :
    ```bash
    docker-compose up -d qualimarc-db qualimarc-db-dumper
    ```
-- lancez le script de restauration ``restore`` comme ceci et suivez les instructions :
+Ensuite si le repertoire ``../volumes/qualimarc-db/dump/`` est disponible, demander au SIRE s'ils ont acces à une sauvegarde des dumps de la base de donnée. Ensuite prendre le dumps de la plus fiable et récente et la placer dans le repertoire ``../volumes/qualimarc-db/dump/`` (Le dump devrait se nommer sous cette forme là ``pgsql_qualimarc_qualimarc-db_20220801-143201.sql.gz``).
+Une fois le dump placé, lancez uniquement les conteneurs ``qualimarc-db`` et ``qualimarc-db-dumper`` s'ils sont pas déjà lancé :
+   ```bash
+   docker-compose up -d qualimarc-db qualimarc-db-dumper
+   ```
+lancez le script de restauration ``restore`` comme ceci et suivez les instructions :
    ```bash
    docker exec -it qualimarc-db-dumper restore
    ```
-- C'est bon, la base de données qualimarc est alors restaurée
+C'est bon, la base de données qualimarc est alors restaurée
 
+- #### Verifier si tout marche
 Lancez alors toute l'application qualimarc et vérifiez qu'elle fonctionne bien :
 ```bash
 cd /opt/pod/qualimarc-docker/
